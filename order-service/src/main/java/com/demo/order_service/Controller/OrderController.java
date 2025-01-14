@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.order_service.pojo.OrderPojo;
+import com.demo.order_service.pojo.PaymentPojo;
 import com.demo.order_service.repository.entity.Order;
 import com.demo.order_service.service.OrderService;
 
@@ -25,6 +27,12 @@ public class OrderController {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@PostMapping("/create")
+    public ResponseEntity<String> createOrder(@RequestBody OrderPojo orderPojo) {
+    	orderService.createOrder(orderPojo);
+        return ResponseEntity.ok("Order created and payment processed!");
+    }
 	
 	@GetMapping("/orders")
 	public ResponseEntity<List<Order>> getAllOrders(){
